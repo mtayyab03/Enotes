@@ -10,7 +10,7 @@ import {
   Button,
 } from "react-native";
 import { RFPercentage } from "react-native-responsive-fontsize";
-import { db } from "../../config";
+import { db, auth } from "../../config";
 
 //screen
 import Screen from "../components/Screen";
@@ -36,6 +36,19 @@ export default function Home(props) {
       setUsers(users);
     });
   }, []);
+
+  const handleSignOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        props.navigation.navigate("LoginScreen");
+        console.log("User signed out successfully!");
+      })
+      .catch((error) => {
+        // Handle sign-out errors
+        console.log("Sign-out error:", error);
+      });
+  };
   return (
     <Screen
       style={{
@@ -46,6 +59,35 @@ export default function Home(props) {
       }}
     >
       <Header name="Notes" />
+      <TouchableOpacity
+        onPress={handleSignOut}
+        activeOpacity={0.7}
+        style={{
+          marginTop: RFPercentage(2),
+          position: "absolute",
+          top: RFPercentage(6),
+          width: "90%",
+          alignItems: "flex-end",
+        }}
+      >
+        <View
+          style={{
+            padding: RFPercentage(1),
+            backgroundColor: Colors.red,
+            borderRadius: RFPercentage(1),
+          }}
+        >
+          <Text
+            style={{
+              color: Colors.white,
+              fontFamily: FontFamily.medium,
+              fontSize: RFPercentage(1.7),
+            }}
+          >
+            Sign Out
+          </Text>
+        </View>
+      </TouchableOpacity>
       <View style={{ marginTop: RFPercentage(2) }} />
       <ScrollView
         contentContainerStyle={{ alignItems: "center", paddingBottom: 60 }}
