@@ -3,7 +3,7 @@ import {
   View,
   StyleSheet,
   TextInput,
-  Text,
+  Image,
   TouchableOpacity,
 } from "react-native";
 
@@ -40,6 +40,12 @@ const SignUpScreen = (props) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.logocontainer}>
+        <Image
+          style={styles.logo}
+          source={require("../../assets/images/enoteslogo.png")}
+        />
+      </View>
       {/* Signup inputs */}
       <Input
         label="Email"
@@ -79,6 +85,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 16,
+    marginBottom: RFPercentage(15),
+  },
+  logocontainer: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  logo: {
+    width: RFPercentage(30),
+    height: RFPercentage(30),
   },
   loginbutton: {
     width: "100%",
